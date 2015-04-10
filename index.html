@@ -774,7 +774,11 @@
 			 	child3.volume = Math.min(1, 1/camera.position.distanceTo(dodecahome.position));
 			 }
 
-			tapMovement(0.8);//.8 scaled for this thing
+
+			if (controls.phoneVR.orientationIsAvailable()) {//do phone interface if phone
+				tapMovement(0.8);//.8 scaled for this thing
+			}
+			
 			controls.update();
 			effect.render( scene, camera );
 			requestAnimationFrame( animate );
