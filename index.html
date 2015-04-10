@@ -115,7 +115,7 @@
 		var music = document.querySelector('#music');
   		var music2 = document.querySelector('#music2');
   		var child3 = document.querySelector('#child3');
-		child3.volume = 0; //so that it plays on click on phones but has no volume until needed.
+		//child3.volume = 1;
   		var teeth = document.querySelector('#teeth');
   		var bing = document.querySelector('#bing');
   		var fishNoise = document.querySelector('#fishNoise');
@@ -771,7 +771,7 @@
 		 		}
 		 	}
 		 	if (!winAll){
-			 	child3.volume = Math.min(1, 2/camera.position.distanceTo(dodecahome.position));
+			 	child3.volume = Math.min(1, 1/camera.position.distanceTo(dodecahome.position));
 			 }
 
 			tapMovement(0.8);//.8 scaled for this thing
@@ -783,53 +783,58 @@
 
 		animate();
 
-
-		document.body.addEventListener( 'click', function() {
-			effect.setFullScreen( true );
-			if (music.paused){
-		  			music.play();
-		  			music2.play();
-		  			child3.play();
-		  	}
+		document.body.addEventListener( 'dblclick', function() {
+				effect.setFullScreen( true );
 		});
 
+		if (controls.phoneVR.orientationIsAvailable()) { //do phone interface if phone
+			document.body.addEventListener( 'click', function() {
+				effect.setFullScreen( true );
+				if (music.paused){
+			  			music.play();
+			  			music2.play();
+			  			child3.play();
+			  	}
+			});
+		};
+
 		function onkey(event) {
-	    event.preventDefault();
+		    event.preventDefault();
 
-	    if (event.keyCode == 90) { // z
-	    	controls.zeroSensor(); //zero rotation
-	    } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
-	    	effect.setFullScreen(true) //fullscreen else if (event.keyCode == 80) {//p
+		    if (event.keyCode == 90) { // z
+		    	controls.zeroSensor(); //zero rotation
+		    } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
+		    	effect.setFullScreen(true) //fullscreen else if (event.keyCode == 80) {//p
 
-	  	} else if (event.keyCode == 32 || event.keyCode == 80) { //space or p
-	  		if (music.paused){
-		  			music.play();
-		  			music2.play();
-		  			teeth.muted = false;
-	  			if (!theEnd){
-		  			child3.muted = false;
-		  			bing.muted = false;
-		  			cubeUp1.muted = false;
-		  			fishNoise.muted = false;
+		  	} else if (event.keyCode == 32 || event.keyCode == 80) { //space or p
+		  		if (music.paused){
+			  			music.play();
+			  			music2.play();
+			  			teeth.muted = false;
+		  			if (!theEnd){
+			  			child3.muted = false;
+			  			bing.muted = false;
+			  			cubeUp1.muted = false;
+			  			fishNoise.muted = false;
+			  			for (var i=0; i<cubeSfx.length; i++){
+			  				cubeSfx[i].muted = false;
+			  			}
+			  		}
+		  		} else{
+		  			music.pause();
+		  			music2.pause();
+		  			child3.muted = true;
+		  			bing.muted = true;
+		  			cubeUp1.muted = true;
+		  			fishNoise.muted = true;
+		  			teeth.muted = true;
 		  			for (var i=0; i<cubeSfx.length; i++){
-		  				cubeSfx[i].muted = false;
+		  				cubeSfx[i].muted = true;
 		  			}
 		  		}
-	  		} else{
-	  			music.pause();
-	  			music2.pause();
-	  			child3.muted = true;
-	  			bing.muted = true;
-	  			cubeUp1.muted = true;
-	  			fishNoise.muted = true;
-	  			teeth.muted = true;
-	  			for (var i=0; i<cubeSfx.length; i++){
-	  				cubeSfx[i].muted = true;
-	  			}
-	  		}
-	  	}
+		  	}
 
-	  };
+	  	};
 
 	    window.addEventListener("keydown", onkey, true);
 
