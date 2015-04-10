@@ -791,16 +791,19 @@
 				effect.setFullScreen( true );
 		});
 
-		if (controls.phoneVR.orientationIsAvailable()) { //do phone interface if phone
-			document.body.addEventListener( 'click', function() {
+		
+		document.body.addEventListener( 'click', function() {
+			if (controls.phoneVR.orientationIsAvailable()) { //do phone interface if phone
 				effect.setFullScreen( true );
 				if (music.paused){
 			  			music.play();
 			  			music2.play();
 			  			child3.play();
 			  	}
-			});
-		};
+			};
+		});
+
+	
 
 		function onkey(event) {
 		    event.preventDefault();
