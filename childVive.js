@@ -13,7 +13,7 @@
 	/*
 	Create a three.js camera
 	*/
-	var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 1, 10000 );
+	var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, .01, 1000 );
 	/*
 	Apply VR headset positional data to camera.
 	*/
@@ -419,6 +419,9 @@
 	everything.add(winLight);
 
 	scene.add(everything);
+	everything.scale.set(0.2,0.2,0.2);
+	everything.position.set(0,6,0);
+
 
 	var partVector = new THREE.Vector3;
 	var boingVector = new THREE.Vector3;
