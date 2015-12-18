@@ -455,7 +455,7 @@
 			slat.material.color.set(0xff0000);
 		} else {
 			slat.material.color.set(0x330000);
-		}
+		};
 
 
 
