@@ -153,7 +153,7 @@ THREE.VRControls = function ( camera, done ) {
 			this.manualRotateRate[0] = -1 * Math.round(controller.axes[3]);
 		}
 
-	  var interval = (newTime - oldTime) * 0.001;
+	  var interval = (newTime - oldTime) * 0.003;
 	  var update = quat.fromValues(this.manualRotateRate[0] * interval,
 	                               this.manualRotateRate[1] * interval,
 	                               this.manualRotateRate[2] * interval, 1.0);
