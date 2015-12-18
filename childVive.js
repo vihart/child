@@ -424,8 +424,8 @@
 
 	var sled = new THREE.Object3D();
 	var slat = new THREE.Mesh(
-		new THREE.BoxGeometry(1,0.1,1),
-		new THREE.MeshLambertMaterial({color: 0xff0000})
+		new THREE.BoxGeometry(0.5,0.05,1),
+		new THREE.MeshLambertMaterial({color: 0x330000})
 		);
 	sled.add(slat);
 	scene.add(sled);
@@ -444,7 +444,17 @@
 	var winTimer = 0;
 	var theEnd = false;
 
+	var pos = new THREE.Vector2;
+
 	function animate() {
+
+		pos.set(camera.position.x, camera.position.z);
+
+		if (pos.distanceTo(sled.position) < 4){
+			slat.material.color.set(0xff0000);
+		} else {
+			slat.material.color.set(0x330000);
+		}
 
 		win.rotation.y += .002;
 		//win states
