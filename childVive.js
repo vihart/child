@@ -445,16 +445,19 @@
 	var theEnd = false;
 
 	var pos = new THREE.Vector2;
+	var crouchHeight = 1.2;
 
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
 
-		if (pos.distanceTo(sled.position) < 4){
+		if ((pos.distanceTo(sled.position) < 0.5) && (camera.position.y < crouchHeight) ){
 			slat.material.color.set(0xff0000);
 		} else {
 			slat.material.color.set(0x330000);
 		}
+
+
 
 		win.rotation.y += .002;
 		//win states
