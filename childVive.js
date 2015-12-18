@@ -90,7 +90,7 @@
 
 	var partMat = new THREE.PointCloudMaterial({
 			color: 0xffffff,
-			size: 1.5,
+			size: 0.3,
 			map: THREE.ImageUtils.loadTexture("media/starflake.png"),
 			blending: THREE.AdditiveBlending,
 			transparent: true
@@ -135,7 +135,7 @@
 
 	var partMat2 = new THREE.PointCloudMaterial({
 			color: 0xffffff,
-			size: 10,
+			size: 2,
 			map: THREE.ImageUtils.loadTexture("media/tallParticle.png"),
 			blending: THREE.AdditiveBlending,
 			transparent: true
@@ -420,7 +420,15 @@
 
 	scene.add(everything);
 	everything.scale.set(0.2,0.2,0.2);
-	everything.position.set(0,6,0);
+	everything.position.set(0,7,0);
+
+	var sled = new THREE.Object3D();
+	var slat = new THREE.Mesh(
+		new THREE.BoxGeometry(1,0.1,1),
+		new THREE.MeshLambertMaterial({color: 0xff0000})
+		);
+	sled.add(slat);
+	scene.add(sled);
 
 
 	var partVector = new THREE.Vector3;
