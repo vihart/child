@@ -471,6 +471,7 @@
 	var pos = new THREE.Vector2;
 	var moveVector = new THREE.Vector2;
 	var crouchHeight = 1.2;
+	var crouchToggleHeight = 0.5;
 	var sledDistance = 0.8;
 	var speed = 0.1;
 	var zSpot = 0.05;
@@ -487,6 +488,9 @@
 	var sledToggle = 0;
 	var sledToggleDistance = 0.4;
 
+	var tetHeight = -30;
+	var tetIncrement = 0.01;
+
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
@@ -500,7 +504,7 @@
 
 		sled.rotation.y = Math.atan2(pos.x,pos.y);
 
-		if (pos.distanceTo(sled.position) < sledToggleDistance){
+		if ((pos.distanceTo(sled.position) < sledToggleDistance))&&(crouchToggleHeight)){
 			sledToggle = 1;
 		}
 
@@ -645,6 +649,9 @@
 			tet.position.add(boingness);
 			boingLight.distance = (boing*10 + 4)*c
 			boing -= .05;
+		}
+		if (tet.position.y < tetHeight){
+			tet.position.y += tetIncrement;
 		}
 
 		t += .01;
