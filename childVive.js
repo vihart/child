@@ -107,7 +107,7 @@
 		new THREE.DodecahedronGeometry(14),
 		new THREE.MeshLambertMaterial());
 	dodecahome.position.y = camera.position.y;
-	while (relativeDodecahome.distanceTo(pos) < (20*c)){
+	while (dodecahome.position.distanceTo(camera.position) < (20*c)){
 		dodecahome.position.set(
 				Math.random()*100 -50,
 				camera.position.y,
