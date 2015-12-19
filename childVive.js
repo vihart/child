@@ -565,7 +565,7 @@
 
 		//cube stretch stuff
 		for (var i = 0; i<cubeCount; i++){
-			relativeCube.set((everything.position.x + cubeArray[i].position.x), (everything.position.z + cubeArray[i].position.z));
+			relativeCube.set((everything.position.x + cubeArray[i].position.x*c), (everything.position.z + cubeArray[i].position.z*c));
 			if ( pos.distanceTo(relativeCube) < 2*c){
 				if ( cubeArray[i].geometry.heightSegments/4 > cubeArray[i].scale.y){
 					cubeSfx[i+cubeCount].play();
@@ -577,7 +577,7 @@
 				}
 			} else {
 				if ( cubeArray[i].scale.y > 1){
-					cubeSfx[i].volume = Math.min(1, 2/cubeArray[i].position.distanceTo(camera.position));
+					cubeSfx[i].volume = Math.min(1, 2/relativeCube.distanceTo(pos));
 					cubeSfx[i].play();
 					cubeArray[i].scale.y -= .004;
 				}
