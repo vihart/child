@@ -488,11 +488,11 @@
 		pos.set(camera.position.x, camera.position.z);
 		// headProjection.position.x = pos.x;
 		// headProjection.position.z = pos.y;
-		relativeWin.set(pos.x + win.position.x*c, pos.y + win.position.z*c);
-		relativeTet.set(pos.x + tet.position.x*c, tet.position.y*c, pos.y + tet.position.z*c);
-		relativeDodecahome.set(pos.x + dodecahome.position.x*c, pos.y + dodecahome.position.z*c);
-		relativeLight.set(pos.x + goldLight.position.x*c, pos.y + goldLight.position.z*c);
-		relativeOctoflock.set(pos.x + octFlock.position.x*c, pos.y + octFlock.position.z*c);
+		relativeWin.set(everything.position.x + win.position.x*c, everything.position.z + win.position.z*c);
+		relativeTet.set(everything.position.x + tet.position.x*c, tet.position.y*c, everything.position.z + tet.position.z*c);
+		relativeDodecahome.set(everything.position.x + dodecahome.position.x*c, everything.position.z + dodecahome.position.z*c);
+		relativeLight.set(everything.position.x + goldLight.position.x*c, everything.position.z + goldLight.position.z*c);
+		relativeOctoflock.set(everything.position.x + octFlock.position.x*c, everything.position.z + octFlock.position.z*c);
 
 		sled.rotation.y = Math.atan2(pos.x,pos.y);
 

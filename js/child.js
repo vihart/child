@@ -12,7 +12,7 @@
 	/*
 	Create a three.js camera
 	*/
-	var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 1, 10000 );
+	var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 0.01, 10000 );
 	/*
 	Apply VR headset positional data to camera.
 	*/
