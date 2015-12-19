@@ -767,7 +767,7 @@
 	 		}
 	 	}
 	 	if (!winAll){
-		 	child3.volume = Math.min(1, 1/(pos.distanceTo(relativeDodecahome)));te
+		 	child3.volume = Math.min(1, 1/(pos.distanceTo(relativeDodecahome)));
 		 }
 
 
