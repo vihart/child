@@ -489,7 +489,7 @@
 		// headProjection.position.x = pos.x;
 		// headProjection.position.z = pos.y;
 		relativeWin.set(everything.position.x + win.position.x*c, everything.position.z + win.position.z*c);
-		relativeTet.set(everything.position.x + tet.position.x*c, tet.position.y*c, everything.position.z + tet.position.z*c);
+		relativeTet.set(everything.position.x + tet.position.x*c, everything.position.y + tet.position.y*c, everything.position.z + tet.position.z*c);
 		relativeDodecahome.set(everything.position.x + dodecahome.position.x*c, everything.position.z + dodecahome.position.z*c);
 		relativeLight.set(everything.position.x + goldLight.position.x*c, everything.position.z + goldLight.position.z*c);
 		relativeOctoflock.set(everything.position.x + octFlock.position.x*c, everything.position.z + octFlock.position.z*c);
@@ -605,7 +605,7 @@
 		octFlock.position.z += Math.cos(t)/16 + Math.sin(t/3)/18;
 		fishLight.position.set(octFlock.position.x,octFlock.position.y,octFlock.position.z);
 
-		if(pos.distanceTo(relativeOctoflock)<(20*c) && !winAll){ //octfish react
+		if(pos.distanceTo(relativeOctoflock)<(10*c) && !winAll){ //octfish react
 			fishy = Math.max(0, fishy - .001); //fishy starts at 1 and goes to 0
 			particleSystem.material.color.setRGB(fishy,fishy,1);
 			fishNoise.play();
@@ -767,7 +767,7 @@
 	 		}
 	 	}
 	 	if (!winAll){
-		 	child3.volume = Math.min(1, 1/(pos.distanceTo(relativeDodecahome)*c));
+		 	child3.volume = Math.min(1, 1/(pos.distanceTo(relativeDodecahome)));te
 		 }
 
 
