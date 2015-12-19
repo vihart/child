@@ -501,7 +501,7 @@
 		sled.rotation.y = Math.atan2(pos.x,pos.y);
 
 		if (pos.distanceTo(sled.position) < sledToggleDistance){
-			sledToggle == 1;
+			sledToggle = 1;
 		}
 
 		if ((sledToggle == 1) && (pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
