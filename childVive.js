@@ -428,6 +428,7 @@
 		new THREE.TetrahedronGeometry(),
 		new THREE.MeshLambertMaterial({color: 0xffff00})
 		);
+	sledCenter.scale.set(0.1,0.1,0.1);
 	sled.add(sledCenter);
 
 	var sledFront = new THREE.Mesh(
@@ -435,13 +436,13 @@
 		new THREE.MeshLambertMaterial({color: 0x00ff00})
 		);
 	sledFront.position.z = 0.5;
+	sledFront.scale.set(0.1,0.1,0.1);
 	sled.add(sledFront);
 
 	var slat = new THREE.Mesh(
 		new THREE.BoxGeometry(0.5,0.05,1),
 		new THREE.MeshLambertMaterial({color: 0x330000})
 		);
-	slat.position.set(-0.25,0,-0.5);
 	sled.add(slat);
 
 	scene.add(sled);
@@ -450,6 +451,7 @@
 		new THREE.IcosahedronGeometry(),
 		new THREE.MeshLambertMaterial({color: 0x0000ff})
 	);
+	headProjection.scale.set(0.1,0.1,0.1);
 	scene.add(headProjection);
 
 
@@ -468,22 +470,29 @@
 
 	var pos = new THREE.Vector2;
 	var everythingPos = new THREE.Vector2;
+	var moveVector = new THREE.Vector2;
 	var crouchHeight = 1;
 	var sledDistance = 0.8;
-	var speed = 0.02;
+	var speed = 1;
 	var zSpot = 0.05;
 	var xSpot = 0.05;
 
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
-		everythingPos.set(everything.position.x, everything.position.z);
+		// everythingPos.set(everything.position.x, everything.position.z);
 		headProjection.position.x = pos.x;
 		headProjection.position.z = pos.y;
 
 		if ((pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
 			slat.material.color.set(0xff0000);
-			
+			moveVector.set(-pos.x, -pos.y);
+			moveVector.multiplyScalar(speed);
+			everything.position.x += moveVector.x;
+			everything.position.z += moveVector.y;
+
+
+
 			// if (camera.position.z > zSpot){
 			// 	everything.position.z -= speed;
 			// }else if (camera.position.z > -zSpot){
