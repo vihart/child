@@ -446,8 +446,10 @@
 
 	var pos = new THREE.Vector2;
 	var crouchHeight = 1;
-	var sledDistance = 0.4;
-	var speed = 0.001;
+	var sledDistance = 0.8;
+	var speed = 0.02;
+	var zSpot = 0.05;
+	var xSpot = 0.05;
 
 	function animate() {
 
@@ -455,9 +457,16 @@
 
 		if ((pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
 			slat.material.color.set(0xff0000);
-			if (camera.position.x < 0.1){
+			if (camera.position.z > zSpot){
+				everything.position.z -= speed;
+			}else if (camera.position.z > -zSpot){
+				everything.position.z += speed;
+			}else if (camera.position.x > xSpot){
+				everything.position.x += speed;
+			}else if (camera.position.x > -xSpot){
 				everything.position.x += speed;
 			}
+
 		} else {
 			slat.material.color.set(0x330000);
 		};
