@@ -492,7 +492,7 @@
 		relativeTet.set(pos.x + tet.position.x*c, pos.y + tet.position.z*c);
 		relativeDodecahome.set(pos.x + dodecahome.position.x*c, pos.y + dodecahome.position.z*c);
 		relativeLight.set(pos.x + goldLight.position.x*c, pos.y + goldLight.position.z*c);
-		relativeOctoflock.set(pos.x + octFlock.position.x*c, pos.y + octoFlock.position.z*c);
+		relativeOctoflock.set(pos.x + octFlock.position.x*c, pos.y + octFlock.position.z*c);
 
 		sled.rotation.y = Math.atan2(pos.x,pos.y);
 
