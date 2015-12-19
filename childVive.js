@@ -483,6 +483,10 @@
 	var relativeWin = new THREE.Vector2;
 	var relativeCube = new THREE.Vector2;
 
+	var boingFactor = 0.3;
+	var sledToggle = 0;
+	var sledToggleDistance = 0.4;
+
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
@@ -496,13 +500,18 @@
 
 		sled.rotation.y = Math.atan2(pos.x,pos.y);
 
-		if ((pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
+		if (pos.distanceTo(sled.position) < sledToggleDistance){
+			sledToggle == 1;
+		}
+
+		if ((sledToggle == 1) && (pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
 			slat.material.color.set(0xff0000);
 			moveVector.set(-pos.x, -pos.y);
 			moveVector.multiplyScalar(speed);
 			everything.position.x += moveVector.x;
 			everything.position.z += moveVector.y;
 		} else {
+			sledToggle = 0;
 			slat.material.color.set(0x330000);
 		};
 
@@ -632,7 +641,7 @@
 		}
 		if (boing>0){ //boing tetrahedron away
 			var boingVector = new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);
-			var boingness = boingVector.multiplyScalar(.1*c);
+			var boingness = boingVector.multiplyScalar(boingFactor*c);
 			tet.position.add(boingness);
 			boingLight.distance = (boing*10 + 4)*c
 			boing -= .05;
