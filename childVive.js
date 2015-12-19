@@ -457,7 +457,7 @@
 
 	var partVector = new THREE.Vector3;
 	var boingVector = new THREE.Vector3;
-	var relativeCube = THREE.Vector2;
+	var relativeCube = new THREE.Vector2;
 
 	var fishyWin1 = false;
 	var fishyWin2 = false;
