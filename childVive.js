@@ -1,4 +1,4 @@
-	var c = 1; //scale factor
+	var c = 1/5; //scale factor
 
 	var renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setClearColor( 0x000000, 1 );
@@ -90,7 +90,7 @@
 
 	var partMat = new THREE.PointCloudMaterial({
 			color: 0xffffff,
-			size: 0.3,
+			size: 1.5*c,
 			map: THREE.ImageUtils.loadTexture("media/starflake.png"),
 			blending: THREE.AdditiveBlending,
 			transparent: true
@@ -135,7 +135,7 @@
 
 	var partMat2 = new THREE.PointCloudMaterial({
 			color: 0xffffff,
-			size: 2,
+			size: 10*c,
 			map: THREE.ImageUtils.loadTexture("media/tallParticle.png"),
 			blending: THREE.AdditiveBlending,
 			transparent: true
@@ -177,7 +177,7 @@
 	var signMat = new THREE.MeshLambertMaterial({map: infoText, color: 0xffffff});
 	var sign = new THREE.Mesh(dodecGeom, signMat);
 
-	sign.position.set(-0.5, -31, -2);
+	sign.position.set(-0.5, -31, -4);
 	sign.rotation.y = 2;
 	everything.add(sign);
 
@@ -365,45 +365,45 @@
 	everything.add(win);
 
 	//create light
-	var light = new THREE.SpotLight( 0xffffff, .8, 800);
+	var light = new THREE.SpotLight( 0xffffff, .8, 800*c);
 	light.position.set( -50,20,.1);
 	light.castShadow = true;
 	everything.add( light );
 
-	var light2 = new THREE.SpotLight( 0xffffff, .4, 600);
+	var light2 = new THREE.SpotLight( 0xffffff, .4, 600*c);
 	light2.position.set( 30,10,40);
 	light2.castShadow = true;
 	everything.add( light2 );
 
-	var light3 = new THREE.SpotLight( 0xffffff, .2, 500);
+	var light3 = new THREE.SpotLight( 0xffffff, .2, 500*c);
 	light3.position.set( -10,15,20);
 	light3.castShadow = true;
 	everything.add( light3 );
 
-	var fishLight =new THREE.PointLight( 0x88ffff, .8, 5);
+	var fishLight =new THREE.PointLight( 0x88ffff, .8, 5*c);
 	everything.add(fishLight);
 
-	var cubeLight =new THREE.PointLight( 0xffaaee, .9, 35);
+	var cubeLight =new THREE.PointLight( 0xffaaee, .9, 35*c);
 	cubeLight.position.x = cubeSpot.x + 12;
 	cubeLight.position.y = cubeSpot.y;
 	cubeLight.position.z = cubeSpot.z + 12;
 	everything.add(cubeLight);
 
-	var boingLight =new THREE.PointLight( 0xff4400, .6, 10);
+	var boingLight =new THREE.PointLight( 0xff4400, .6, 10*c);
 	boingLight.position.set(tet.position.x,tet.position.y,tet.position.z);
 	everything.add(boingLight);
 
-	var dodecLight =new THREE.PointLight( 0x0000ff, .25, 15);
+	var dodecLight =new THREE.PointLight( 0x0000ff, .25, 15*c);
 	dodecLight.position.set(dodecahome.position.x, dodecahome.position.y+2, dodecahome.position.z-2);
 	dodecLight.castShadow = true;
 	everything.add(dodecLight);
 
-	var dodecLight2 =new THREE.PointLight( 0xff0000, .3, 15);
+	var dodecLight2 =new THREE.PointLight( 0xff0000, .3, 15*c);
 	dodecLight2.position.set(dodecahome.position.x, dodecahome.position.y-2, dodecahome.position.z+2);
 	dodecLight2.castShadow = true;
 	everything.add(dodecLight2);
 
-	var goldLight = new THREE.PointLight( 0xffdd00, .6, 10);
+	var goldLight = new THREE.PointLight( 0xffdd00, .6, 10*c);
 	goldLight.position.y = camera.position.y;
 	while (goldLight.position.distanceTo(camera.position) < 15 || goldLight.position.distanceTo(tet.position) < 10 || goldLight.position.distanceTo(cubeSpot) < 10 || goldLight.position.distanceTo(dodecahome.position) < 14){
 		goldLight.position.set(
@@ -414,7 +414,7 @@
 	goldLight.castShadow = false;
 	everything.add( goldLight );
 
-	var winLight = new THREE.PointLight( 0xffffdd, .5, 25);
+	var winLight = new THREE.PointLight( 0xffffdd, .5, 25*c);
 	winLight.position.set(win.position.x, win.position.y, win.position.z);
 	everything.add(winLight);
 
@@ -564,7 +564,7 @@
 
 		//cube stretch stuff
 		for (var i = 0; i<cubeCount; i++){
-			if ( camera.position.distanceTo(cubeArray[i].position) < 2){
+			if ( pos.position.distanceTo(everything.position.x + cubeArray[i].position.x , everything.position.z + cubeArray[i].position.z) < 2*c){
 				if ( cubeArray[i].geometry.heightSegments/4 > cubeArray[i].scale.y){
 					cubeSfx[i+cubeCount].play();
 					cubeArray[i].scale.y += .05;
