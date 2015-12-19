@@ -425,14 +425,14 @@
 	var sled = new THREE.Object3D();
 
 	var sledCenter = new THREE.Mesh(
-		new THREE.TetrahedronGeometry();
-		new THREE.MeshLambertMaterial({color: 0xffff00});
+		new THREE.TetrahedronGeometry(),
+		new THREE.MeshLambertMaterial({color: 0xffff00})
 		);
 	sled.add(sledCenter);
 
 	var sledFront = new THREE.Mesh(
-		new THREE.TetrahedronGeometry();
-		new THREE.MeshLambertMaterial({color: 0x00ff00});
+		new THREE.TetrahedronGeometry(),
+		new THREE.MeshLambertMaterial({color: 0x00ff00})
 		);
 	sledFront.position.z = 0.5;
 	sled.add(sledFront);
@@ -447,8 +447,8 @@
 	scene.add(sled);
 
 	var headProjection = new THREE.Mesh(
-		new THREE.IcosahedronGeometry();
-		new THREE.MeshLambertMaterial({color: 0x0000ff});
+		new THREE.IcosahedronGeometry(),
+		new THREE.MeshLambertMaterial({color: 0x0000ff})
 	);
 	scene.add(headProjection);
 
