@@ -564,7 +564,9 @@
 
 		//cube stretch stuff
 		for (var i = 0; i<cubeCount; i++){
-			if ( pos.position.distanceTo(everything.position.x + cubeArray[i].position.x , everything.position.z + cubeArray[i].position.z) < 2*c){
+			var relativeCube = THREE.Vector2;
+			relativeCube.set((everything.position.x + cubeArray[i].position.x), (everything.position.z + cubeArray[i].position.z));
+			if ( pos.position.distanceTo(relativeCube) < 2*c){
 				if ( cubeArray[i].geometry.heightSegments/4 > cubeArray[i].scale.y){
 					cubeSfx[i+cubeCount].play();
 					cubeArray[i].scale.y += .05;
