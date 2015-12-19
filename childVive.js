@@ -457,6 +457,7 @@
 
 	var partVector = new THREE.Vector3;
 	var boingVector = new THREE.Vector3;
+	var relativeCube = THREE.Vector2;
 
 	var fishyWin1 = false;
 	var fishyWin2 = false;
@@ -564,7 +565,6 @@
 
 		//cube stretch stuff
 		for (var i = 0; i<cubeCount; i++){
-			var relativeCube = THREE.Vector2;
 			relativeCube.set((everything.position.x + cubeArray[i].position.x), (everything.position.z + cubeArray[i].position.z));
 			if ( pos.position.distanceTo(relativeCube) < 2*c){
 				if ( cubeArray[i].geometry.heightSegments/4 > cubeArray[i].scale.y){
