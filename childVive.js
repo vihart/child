@@ -469,20 +469,20 @@
 	var theEnd = false;
 
 	var pos = new THREE.Vector2;
-	var everythingPos = new THREE.Vector2;
 	var moveVector = new THREE.Vector2;
-	var crouchHeight = 1;
+	var crouchHeight = 1.2;
 	var sledDistance = 0.8;
-	var speed = 1;
+	var speed = 0.1;
 	var zSpot = 0.05;
 	var xSpot = 0.05;
 
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
-		// everythingPos.set(everything.position.x, everything.position.z);
 		headProjection.position.x = pos.x;
 		headProjection.position.z = pos.y;
+
+		sled.rotation.y = Math.atan2(pos.x,pos.y);
 
 		if ((pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
 			slat.material.color.set(0xff0000);
@@ -490,19 +490,6 @@
 			moveVector.multiplyScalar(speed);
 			everything.position.x += moveVector.x;
 			everything.position.z += moveVector.y;
-
-
-
-			// if (camera.position.z > zSpot){
-			// 	everything.position.z -= speed;
-			// }else if (camera.position.z > -zSpot){
-			// 	everything.position.z += speed;
-			// }else if (camera.position.x > xSpot){
-			// 	everything.position.x += speed;
-			// }else if (camera.position.x > -xSpot){
-			// 	everything.position.x += speed;
-			// }
-
 		} else {
 			slat.material.color.set(0x330000);
 		};
