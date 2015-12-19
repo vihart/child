@@ -107,7 +107,7 @@
 		new THREE.DodecahedronGeometry(14),
 		new THREE.MeshLambertMaterial());
 	dodecahome.position.y = camera.position.y;
-	while (dodecahome.position.distanceTo(camera.position) < 20){
+	while (relativeDodecahome.distanceTo(pos) < (20*c)){
 		dodecahome.position.set(
 				Math.random()*100 -50,
 				camera.position.y,
@@ -424,16 +424,16 @@
 
 	var sled = new THREE.Object3D();
 
-	var sledCenter = new THREE.Mesh(
-		new THREE.TetrahedronGeometry(),
-		new THREE.MeshLambertMaterial({color: 0xffff00})
-		);
-	sledCenter.scale.set(0.1,0.1,0.1);
-	sled.add(sledCenter);
+	// var sledCenter = new THREE.Mesh(
+	// 	new THREE.TetrahedronGeometry(),
+	// 	new THREE.MeshLambertMaterial({color: 0xffff00})
+	// 	);
+	// sledCenter.scale.set(0.1,0.1,0.1);
+	// sled.add(sledCenter);
 
 	var sledFront = new THREE.Mesh(
 		new THREE.TetrahedronGeometry(),
-		new THREE.MeshLambertMaterial({color: 0x00ff00})
+		new THREE.MeshLambertMaterial({color: 0x550000})
 		);
 	sledFront.position.z = 0.5;
 	sledFront.scale.set(0.1,0.1,0.1);
@@ -447,17 +447,16 @@
 
 	scene.add(sled);
 
-	var headProjection = new THREE.Mesh(
-		new THREE.IcosahedronGeometry(),
-		new THREE.MeshLambertMaterial({color: 0x0000ff})
-	);
-	headProjection.scale.set(0.1,0.1,0.1);
-	scene.add(headProjection);
+	// var headProjection = new THREE.Mesh(
+	// 	new THREE.IcosahedronGeometry(),
+	// 	new THREE.MeshLambertMaterial({color: 0x0000ff})
+	// );
+	// headProjection.scale.set(0.1,0.1,0.1);
+	// scene.add(headProjection);
 
 
 	var partVector = new THREE.Vector3;
 	var boingVector = new THREE.Vector3;
-	var relativeCube = new THREE.Vector2;
 
 	var fishyWin1 = false;
 	var fishyWin2 = false;
@@ -477,11 +476,23 @@
 	var zSpot = 0.05;
 	var xSpot = 0.05;
 
+	var relativeTet = new THREE.Vector3;
+	var relativeDodecahome = new THREE.Vector2;
+	var relativeOctoflock = new THREE.Vector2;
+	var relativeLight = new THREE.Vector2;
+	var relativeWin = new THREE.Vector2;
+	var relativeCube = new THREE.Vector2;
+
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
-		headProjection.position.x = pos.x;
-		headProjection.position.z = pos.y;
+		// headProjection.position.x = pos.x;
+		// headProjection.position.z = pos.y;
+		relativeWin.set(pos.x + win.position.x*c, pos.y + win.position.z*c);
+		relativeTet.set(pos.x + tet.position.x*c, pos.y + tet.position.z*c);
+		relativeDodecahome.set(pos.x + dodecahome.position.x*c, pos.y + dodecahome.position.z*c);
+		relativeLight.set(pos.x + goldLight.position.x*c, pos.y + goldLight.position.z*c);
+		relativeOctoflock.set(pos.x + octFlock.position.x*c, pos.y + octoFlock.position.z*c);
 
 		sled.rotation.y = Math.atan2(pos.x,pos.y);
 
@@ -526,7 +537,7 @@
 		if (fishyWin2 == true && boingWin == true && dodecWin == true && lightWin == true && cubeWin > 11 ){
 			winAll = true;
 		}
-		if (winAll == true && camera.position.distanceTo(win.position)<2){
+		if (winAll == true && pos.distanceTo(relativeWin)<(2*c)){
 			theEnd = true;
 		}
 		if(theEnd == true && winTimer < 6){
@@ -566,7 +577,7 @@
 		//cube stretch stuff
 		for (var i = 0; i<cubeCount; i++){
 			relativeCube.set((everything.position.x + cubeArray[i].position.x*c), (everything.position.z + cubeArray[i].position.z*c));
-			if ( pos.distanceTo(relativeCube) < 2*c){
+			if ( pos.distanceTo(relativeCube) < (2*c)){
 				if ( cubeArray[i].geometry.heightSegments/4 > cubeArray[i].scale.y){
 					cubeSfx[i+cubeCount].play();
 					cubeArray[i].scale.y += .05;
@@ -594,7 +605,7 @@
 		octFlock.position.z += Math.cos(t)/16 + Math.sin(t/3)/18;
 		fishLight.position.set(octFlock.position.x,octFlock.position.y,octFlock.position.z);
 
-		if(camera.position.distanceTo(octFlock.position)<10 && !winAll){ //octfish react
+		if(pos.distanceTo(relativeOctoflock)<(10*c) && !winAll){ //octfish react
 			fishy = Math.max(0, fishy - .001); //fishy starts at 1 and goes to 0
 			particleSystem.material.color.setRGB(fishy,fishy,1);
 			fishNoise.play();
@@ -614,7 +625,7 @@
 		//boinging tetrahedron
 		tet.rotation.y += .005;
 
-		if(camera.position.distanceTo(tet.position)<1.5){ //boing if close
+		if(pos.distanceTo(relativeTet)<(1.5*c)){ //boing if close
 			bing.play();
 			boing = 3;
 			boingWin =true;
@@ -642,7 +653,7 @@
 			goldLight.distance += .001;
 			music2.volume = (99*music2.volume + .00001)/100;
 			music.volume = (99*music.volume + .999)/100;
-			if ( goldLight.position.distanceTo(camera.position) < goldLight.distance
+			if ( relativeLight.distanceTo(pos) < goldLight.distance
 				&& !winAll){
 				foundLight = 1;
 			}
@@ -666,7 +677,7 @@
 			goldLight.distance = 12;
 			goldLight.position.x += Math.sin(t/2)*Math.random()/4;
 			goldLight.position.z += Math.cos(t/2)*Math.random()/4;
-			music2.volume = Math.min(1, 10/goldLight.position.distanceTo(camera.position));
+			music2.volume = Math.min(1, 10/relativeLight.distanceTo(pos));
 			particleSystem.material.color.setRGB(1,1,1-music2.volume);
 			wanderTime += .01
 			if (wanderTime > 8){//light settles into new random place
@@ -748,15 +759,15 @@
 		    particles2.vertices[p].x += Math.cos(2*t+40*particles2.vertices[p].velocity.y)/33;
 	 	 }
 
-	 	if ( camera.position.distanceTo(dodecahome.position) < 16) {
+	 	if ( pos.distanceTo(relativeDodecahome) < (16*c)) {
 	 		music.volume = (9*music.volume + .000001)/10;
 	 		// child3.play();
-	 		if (camera.position.distanceTo(dodecahome.position) < 12){
+	 		if (pos.distanceTo(relativeDodecahome) < (12*c)){
 	 			dodecWin = true;
 	 		}
 	 	}
 	 	if (!winAll){
-		 	child3.volume = Math.min(1, 1/camera.position.distanceTo(dodecahome.position));
+		 	child3.volume = Math.min(1, 1/pos.distanceTo(relativeDodecahome));
 		 }
 
 
