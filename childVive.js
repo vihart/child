@@ -650,7 +650,7 @@
 		//light gamification
 		if ( foundLight == 0){ //haven't found the gold light
 			goldLight.intensity += Math.sin(t)/200;
-			goldLight.distance += .001;
+			goldLight.distance += .001*c;
 			music2.volume = (99*music2.volume + .00001)/100;
 			music.volume = (99*music.volume + .999)/100;
 			if ( relativeLight.distanceTo(pos) < goldLight.distance
@@ -662,9 +662,9 @@
 			music2.volume = (99*music2.volume + .999)/100;
 			particleSystem.material.color.setRGB(1,1,1.6-goldLight.intensity);
 			goldLight.intensity += .005;
-			goldLight.distance += .7;
+			goldLight.distance += .7*c;
 			if (goldLight.intensity > 2.5){
-				goldLight.distance = (19 * goldLight.distance + 12) / 20;
+				goldLight.distance = c*(19 * goldLight.distance + 12) / 20;
 				if (goldLight.intensity > 4){
 					newPos.set(
 						Math.random()*100 -50,
@@ -674,7 +674,7 @@
 				}
 			}
 		} else if (foundLight == 2){ //light starts wandering
-			goldLight.distance = 12;
+			goldLight.distance = 12*c;
 			goldLight.position.x += Math.sin(t/2)*Math.random()/4;
 			goldLight.position.z += Math.cos(t/2)*Math.random()/4;
 			music2.volume = Math.min(1, 10/relativeLight.distanceTo(pos));
@@ -683,12 +683,12 @@
 			if (wanderTime > 8){//light settles into new random place
 				goldLight.position.x = (199*goldLight.position.x + newPos.x)/200;
 				goldLight.position.z = (199*goldLight.position.z + newPos.z)/200;
-				goldLight.distance -= .005;
+				goldLight.distance -= .005*c;
 				goldLight.intensity -= .004;
 			}
 			if (wanderTime > 12){//reset light
 				particleSystem.material.color.setRGB(1,1,1);
-				goldLight.distance = 10;
+				goldLight.distance = 10*c;
 				goldLight.intensity = .6;
 				foundLight = 0;
 				wanderTime = 0;
