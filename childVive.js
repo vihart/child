@@ -423,12 +423,34 @@
 	everything.position.set(0,7,0);
 
 	var sled = new THREE.Object3D();
+
+	var sledCenter = new THREE.Mesh(
+		new THREE.TetrahedronGeometry();
+		new THREE.MeshLambertMaterial({color: 0xffff00});
+		);
+	sled.add(sledCenter);
+
+	var sledFront = new THREE.Mesh(
+		new THREE.TetrahedronGeometry();
+		new THREE.MeshLambertMaterial({color: 0x00ff00});
+		);
+	sledFront.position.z = 0.5;
+	sled.add(sledFront);
+
 	var slat = new THREE.Mesh(
 		new THREE.BoxGeometry(0.5,0.05,1),
 		new THREE.MeshLambertMaterial({color: 0x330000})
 		);
+	slat.position.set(-0.25,0,-0.5);
 	sled.add(slat);
+
 	scene.add(sled);
+
+	var headProjection = new THREE.Mesh(
+		new THREE.IcosahedronGeometry();
+		new THREE.MeshLambertMaterial({color: 0x0000ff});
+	);
+	scene.add(headProjection);
 
 
 	var partVector = new THREE.Vector3;
@@ -445,6 +467,7 @@
 	var theEnd = false;
 
 	var pos = new THREE.Vector2;
+	var everythingPos = new THREE.Vector2;
 	var crouchHeight = 1;
 	var sledDistance = 0.8;
 	var speed = 0.02;
@@ -454,18 +477,22 @@
 	function animate() {
 
 		pos.set(camera.position.x, camera.position.z);
+		everythingPos.set(everything.position.x, everything.position.z);
+		headProjection.position.x = pos.x;
+		headProjection.position.z = pos.y;
 
 		if ((pos.distanceTo(sled.position) < sledDistance) && (camera.position.y < crouchHeight) ){
 			slat.material.color.set(0xff0000);
-			if (camera.position.z > zSpot){
-				everything.position.z -= speed;
-			}else if (camera.position.z > -zSpot){
-				everything.position.z += speed;
-			}else if (camera.position.x > xSpot){
-				everything.position.x += speed;
-			}else if (camera.position.x > -xSpot){
-				everything.position.x += speed;
-			}
+			
+			// if (camera.position.z > zSpot){
+			// 	everything.position.z -= speed;
+			// }else if (camera.position.z > -zSpot){
+			// 	everything.position.z += speed;
+			// }else if (camera.position.x > xSpot){
+			// 	everything.position.x += speed;
+			// }else if (camera.position.x > -xSpot){
+			// 	everything.position.x += speed;
+			// }
 
 		} else {
 			slat.material.color.set(0x330000);
