@@ -489,7 +489,7 @@
 		// headProjection.position.x = pos.x;
 		// headProjection.position.z = pos.y;
 		relativeWin.set(pos.x + win.position.x*c, pos.y + win.position.z*c);
-		relativeTet.set(pos.x + tet.position.x*c, tet.position.y, pos.y + tet.position.z*c);
+		relativeTet.set(pos.x + tet.position.x*c, tet.position.y*c, pos.y + tet.position.z*c);
 		relativeDodecahome.set(pos.x + dodecahome.position.x*c, pos.y + dodecahome.position.z*c);
 		relativeLight.set(pos.x + goldLight.position.x*c, pos.y + goldLight.position.z*c);
 		relativeOctoflock.set(pos.x + octFlock.position.x*c, pos.y + octFlock.position.z*c);
@@ -605,7 +605,7 @@
 		octFlock.position.z += Math.cos(t)/16 + Math.sin(t/3)/18;
 		fishLight.position.set(octFlock.position.x,octFlock.position.y,octFlock.position.z);
 
-		if(pos.distanceTo(relativeOctoflock)<(10*c) && !winAll){ //octfish react
+		if(pos.distanceTo(relativeOctoflock)<(20*c) && !winAll){ //octfish react
 			fishy = Math.max(0, fishy - .001); //fishy starts at 1 and goes to 0
 			particleSystem.material.color.setRGB(fishy,fishy,1);
 			fishNoise.play();
