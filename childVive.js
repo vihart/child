@@ -489,7 +489,7 @@
 		// headProjection.position.x = pos.x;
 		// headProjection.position.z = pos.y;
 		relativeWin.set(pos.x + win.position.x*c, pos.y + win.position.z*c);
-		relativeTet.set(pos.x + tet.position.x*c, pos.y + tet.position.z*c);
+		relativeTet.set(pos.x + tet.position.x*c, tet.position.y, pos.y + tet.position.z*c);
 		relativeDodecahome.set(pos.x + dodecahome.position.x*c, pos.y + dodecahome.position.z*c);
 		relativeLight.set(pos.x + goldLight.position.x*c, pos.y + goldLight.position.z*c);
 		relativeOctoflock.set(pos.x + octFlock.position.x*c, pos.y + octFlock.position.z*c);
@@ -588,7 +588,7 @@
 				}
 			} else {
 				if ( cubeArray[i].scale.y > 1){
-					cubeSfx[i].volume = Math.min(1, 2/relativeCube.distanceTo(pos));
+					cubeSfx[i].volume = Math.min(1, 2/(relativeCube.distanceTo(pos)*c));
 					cubeSfx[i].play();
 					cubeArray[i].scale.y -= .004;
 				}
@@ -625,16 +625,16 @@
 		//boinging tetrahedron
 		tet.rotation.y += .005;
 
-		if(pos.distanceTo(relativeTet)<(1.5*c)){ //boing if close
+		if(camera.position.distanceTo(relativeTet)<(1.5*c)){ //boing if close
 			bing.play();
 			boing = 3;
 			boingWin =true;
 		}
-		if (boing>0){ //boing backwards briefly
+		if (boing>0){ //boing tetrahedron away
 			var boingVector = new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);
-			var boingness = boingVector.multiplyScalar(.1);
-			camera.position.sub(boingness);
-			boingLight.distance = boing*10 + 4
+			var boingness = boingVector.multiplyScalar(.1*c);
+			tet.position.add(boingness);
+			boingLight.distance = (boing*10 + 4)*c
 			boing -= .05;
 		}
 
@@ -677,7 +677,7 @@
 			goldLight.distance = 12*c;
 			goldLight.position.x += Math.sin(t/2)*Math.random()/4;
 			goldLight.position.z += Math.cos(t/2)*Math.random()/4;
-			music2.volume = Math.min(1, 10/relativeLight.distanceTo(pos));
+			music2.volume = Math.min(1, 10/(relativeLight.distanceTo(pos)*c));
 			particleSystem.material.color.setRGB(1,1,1-music2.volume);
 			wanderTime += .01
 			if (wanderTime > 8){//light settles into new random place
@@ -767,7 +767,7 @@
 	 		}
 	 	}
 	 	if (!winAll){
-		 	child3.volume = Math.min(1, 1/pos.distanceTo(relativeDodecahome));
+		 	child3.volume = Math.min(1, 1/(pos.distanceTo(relativeDodecahome)*c));
 		 }
 
 
