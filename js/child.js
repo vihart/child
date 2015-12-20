@@ -769,3 +769,15 @@
 		effect.setSize( window.innerWidth, window.innerHeight );
 	}
 	window.addEventListener( 'resize', onWindowResize, false );
+	
+	document.addEventListener('DOMContentLoaded', function() {
+		fetch("https://api.github.com/repos/vihart/child").then(
+			function(resp){
+				resp.json().then(
+					function(json){
+						document.title = document.title + " pushed at: " + (new Date(json.pushed_at)).toLocaleTimeString();
+					}
+				)
+			}
+		)
+	});
