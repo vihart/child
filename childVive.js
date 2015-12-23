@@ -474,8 +474,6 @@
 	var crouchToggleHeight = 0.5;
 	var sledDistance = 0.8;
 	var speed = 0.1;
-	var zSpot = 0.05;
-	var xSpot = 0.05;
 
 	var relativeTet = new THREE.Vector3;
 	var relativeDodecahome = new THREE.Vector2;
